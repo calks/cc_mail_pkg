@@ -11,6 +11,11 @@
 			$this->CharSet = 'utf-8';
 			$this->fromRobot();
 			$this->SetLanguage('ru');
+			
+			if (function_exists('config_mailer')) {
+				config_mailer($this);
+			}
+			
 		}
 		
 		public function setSubject($subject) {
@@ -52,11 +57,12 @@
 		
 		public function Send() {
 			$wrap_template = coreResourceLibrary::getTemplatePath('email_wrap');
-						
-			if (is_file($wrap_template)) {
+					
+			if ($wrap_template) {
 				$smarty = Application::getSmarty();
 				$smarty->assign('content', $this->Body);
 				$smarty->assign('subject', $this->Subject);
+				
 				$this->MsgHTML($smarty->fetch($wrap_template));
 			}
 
