@@ -12,9 +12,25 @@
 			$this->fromRobot();
 			$this->SetLanguage('ru');
 			
-			if (function_exists('config_mailer')) {
-				config_mailer($this);
+			
+			$transport = coreSettingsLibrary::get('mailer/transport');
+			switch ($transport) {
+				case 'smtp':
+					$mailer->IsSMTP();
+					$mailer->Host = coreSettingsLibrary::get('mailer/smtp_host');
+					$mailer->Port = coreSettingsLibrary::get('mailer/smtp_port');;
+					$mailer->SMTPAuth = coreSettingsLibrary::get('mailer/smtp_auth');
+					if ($mailer->SMTPAuth) {
+						$mailer->Username = coreSettingsLibrary::get('mailer/smtp_username');
+						$mailer->Password = coreSettingsLibrary::get('mailer/smtp_password');
+						$mailer->SMTPSecure = coreSettingsLibrary::get('mailer/smtp_secure');
+					}
+					break;				
 			}
+			
+			/*if (function_exists('config_mailer')) {
+				config_mailer($this);
+			}*/
 			
 		}
 		
