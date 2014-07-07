@@ -16,14 +16,14 @@
 			$transport = coreSettingsLibrary::get('mailer/transport');
 			switch ($transport) {
 				case 'smtp':
-					$mailer->IsSMTP();
-					$mailer->Host = coreSettingsLibrary::get('mailer/smtp_host');
-					$mailer->Port = coreSettingsLibrary::get('mailer/smtp_port');;
-					$mailer->SMTPAuth = coreSettingsLibrary::get('mailer/smtp_auth');
-					if ($mailer->SMTPAuth) {
-						$mailer->Username = coreSettingsLibrary::get('mailer/smtp_username');
-						$mailer->Password = coreSettingsLibrary::get('mailer/smtp_password');
-						$mailer->SMTPSecure = coreSettingsLibrary::get('mailer/smtp_secure');
+					$this->IsSMTP();
+					$this->Host = coreSettingsLibrary::get('mailer/smtp_host');
+					$this->Port = coreSettingsLibrary::get('mailer/smtp_port');;
+					$this->SMTPAuth = coreSettingsLibrary::get('mailer/smtp_auth');
+					if ($this->SMTPAuth) {
+						$this->Username = coreSettingsLibrary::get('mailer/smtp_username');
+						$this->Password = coreSettingsLibrary::get('mailer/smtp_password');
+						$this->SMTPSecure = coreSettingsLibrary::get('mailer/smtp_secure');
 					}
 					break;				
 			}
