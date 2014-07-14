@@ -1,9 +1,9 @@
 <?php
 
 	require_once Application::getSitePath() . '/packages/mail/includes/phpmailer/class.phpmailer.php';
+
+	class mailPkgMessageTransportAddonEmailTransport extends PHPMailer {
 	
-	class mailPkgMailerLibrary extends PHPMailer {		
-				
 		public function __construct($exceptions = false) {
 			parent::__construct($exceptions);
 
@@ -27,11 +27,6 @@
 					}
 					break;				
 			}
-			
-			/*if (function_exists('config_mailer')) {
-				config_mailer($this);
-			}*/
-			
 		}
 		
 		public function setSubject($subject) {
@@ -81,12 +76,8 @@
 				
 				$this->MsgHTML($smarty->fetch($wrap_template));
 			}
+			
 
 			return parent::Send();			
-		}
-		
-		
-	}
-	
-	
-	
+		}	
+	} 
