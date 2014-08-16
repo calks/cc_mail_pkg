@@ -70,7 +70,7 @@
 			$wrap_template = coreResourceLibrary::getTemplatePath('email_wrap');
 					
 			if ($wrap_template) {
-				$smarty = Application::getSmarty();
+				$smarty = Application::getSmarty('email_wrap');
 				$smarty->assign('content', $this->Body);
 				$smarty->assign('subject', $this->Subject);
 				
