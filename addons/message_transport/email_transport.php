@@ -27,6 +27,7 @@
 					}
 					break;				
 			}
+			
 		}
 		
 		public function setSubject($subject) {
@@ -38,8 +39,9 @@
 		}
 		
 		public function fromRobot() {
-			$this->From = 'no-reply@' . $_SERVER['HTTP_HOST'];
-			$this->FromName = '';
+			$default_from_email = coreSettingsLibrary::get('mailer/default_from_email');
+			$this->From = $default_from_email ? $default_from_email : 'no-reply@' . Application::getHost();
+			$this->FromName = coreSettingsLibrary::get('mailer/default_from_name');
 		}
 		
 		
@@ -70,13 +72,14 @@
 			$wrap_template = coreResourceLibrary::getTemplatePath('email_wrap');
 					
 			if ($wrap_template) {
+				$original_body = $this->Body;
 				$smarty = Application::getSmarty('email_wrap');
 				$smarty->assign('content', $this->Body);
 				$smarty->assign('subject', $this->Subject);
 				
 				$this->MsgHTML($smarty->fetch($wrap_template));
+				$this->AltBody = $this->NormalizeBreaks($this->html2text($original_body));
 			}
-			
 
 			return parent::Send();			
 		}	

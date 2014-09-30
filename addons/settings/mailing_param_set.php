@@ -10,6 +10,16 @@
 		
 		public function getParamsTree() {
 			$out = array(
+				'default_from_name' => array(
+					'type' => 'string',
+					'displayed_name' => 'Имя по умолчанию в поле FROM'					
+				),
+			
+				'default_from_email' => array(
+					'type' => 'string',
+					'displayed_name' => 'Email по умолчанию в поле FROM'					
+				),
+			
 				'transport' => array(
 					'type' => 'select',
 					'displayed_name' => 'Способ отправки',
@@ -56,6 +66,7 @@
 						)
 					)
 				),
+				
 			);
 			
 			return array('mailer' => $out);
