@@ -62,10 +62,15 @@
 					'constraints' => array(
 						'options' => array(
 							null => 'не выбран', 
-							'ssl' => 'ssl'
+							'ssl' => 'ssl',
+							'tls' => 'tls'
 						)
 					)
 				),
+				'enable_logging' => array(
+					'type' => 'checkbox',
+					'displayed_name' => 'Вести лог отправки'					
+				)
 				
 			);
 			

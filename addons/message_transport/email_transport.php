@@ -81,6 +81,50 @@
 				$this->AltBody = $this->NormalizeBreaks($this->html2text($original_body));
 			}
 
-			return parent::Send();			
-		}	
+			$result = parent::Send();
+			
+			$log_enabled = coreSettingsLibrary::get('mailer/enable_logging');
+			if ($log_enabled) {
+				$this->logSendResult($result);
+			}
+			
+			return $result;
+		}
+		
+		
+		protected function logSendResult($result) {
+			
+			$created = date('Y-m-d H:i:s');
+			$email_from = addslashes($this->From);
+			$email_to = addslashes(implode(', ', array_keys($this->all_recipients)));
+			$email_subject = addslashes($this->Subject);
+			$email_body = addslashes($this->AltBody);
+			$succeed = (int)$result;
+			
+			$db = Application::getDb();
+			$db->execute("
+				INSERT INTO `email_log` (
+					`created`,
+					`email_from`,
+					`email_to`,
+					`email_subject`,
+					`email_body`,
+					`succeed`	
+				) VALUES (
+					'$created',
+					'$email_from',
+					'$email_to',
+					'$email_subject',
+					'$email_body',
+					$succeed
+				)
+			");
+		}
+		
+		
+		
+		
 	} 
+	
+	
+	
