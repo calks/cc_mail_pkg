@@ -1,6 +1,6 @@
 <?php
 
-	class mailPkgSettingsAddonMailingParamSet extends coreSettingsAddonBaseParamSet {
+	class mailPkgMailingSettingGroup extends coreBaseSettingGroup {
 		
 		public function getGroupNames() {
 			return array(

@@ -1,8 +1,9 @@
 <?php
 
-	require_once Application::getSitePath() . '/packages/mail/includes/phpmailer/class.phpmailer.php';
 
-	class mailPkgMessageTransportAddonEmailTransport extends PHPMailer {
+	require_once 'phpmailer/class.phpmailer.php';
+
+	class mailPkgEmailMessageSender extends PHPMailer {
 	
 		public function __construct($exceptions = false) {
 			parent::__construct($exceptions);
