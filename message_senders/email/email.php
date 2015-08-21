@@ -52,7 +52,7 @@
 			$roles_coupling_table = $user->getRolesCouplingTableName();
 			
 			$db = Application::getDb();
-			$admin_role_id = USER_ROLE_ADMIN;
+			$admin_role_id = 'admin';
 			
 			$sql = "
 				SELECT 
