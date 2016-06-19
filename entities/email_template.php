@@ -21,7 +21,7 @@
         }		
 		
 		public function make_form(&$form) {
-            $form->addField(new THiddenField("id"));            
+            $form->addField(coreFormElementsLibrary::get('hidden', 'id'));            
             $form->addField(coreFormElementsLibrary::get('textarea', 'body_content')->attr('style', 'height:400px;width: 680px')->allowHtml());
             $form->addField(coreFormElementsLibrary::get('text', 'subject_content')->attr('style', 'width: 680px'));
             return $form;
